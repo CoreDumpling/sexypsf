@@ -1,2 +1,5 @@
 This(command-line build) is just for debugging/testing.  It may not work 
 properly.
+
+sexycat is an even more trivial tool that writes the raw PCM sound to STDOUT.
+Pipe it into aplay or artscat to hear it. (Format S16_LE, stereo, 44.1KHz)

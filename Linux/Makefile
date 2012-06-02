@@ -2,7 +2,7 @@
 # PCSX Makefile for Linux
 #
 
-all: sexypsf
+all: sexypsf sexycat
 
 RM = rm -f
 STRIP = strip
@@ -14,20 +14,21 @@ LIBS = -lz
 OBJS = ../PsxBios.o ../PsxCounters.o ../PsxDma.o \
        ../Spu.o ../PsxHw.o ../PsxMem.o ../Misc.o \
        ../R3000A.o ../PsxInterpreter.o \
-       ../PsxHLE.o ../spu/spu.o oss.o
-
-OBJS+= LnxMain.o
+       ../PsxHLE.o ../spu/spu.o
 
 CFLAGS += -Wall -Winline -I. -I.. ${FLAGS}
 #CFLAGS+= $(shell pkg-config gtk+-2.0 --cflags)
 
-sexypsf:	${OBJS}
-		${CC} ${LDFLAGS} ${OBJS} -o sexypsf ${LIBS}
+sexypsf:	${OBJS} LnxMain.o oss.o
+		${CC} ${LDFLAGS} $^ -o sexypsf ${LIBS}
 
-.PHONY: clean sexypsf
+sexycat:	${OBJS} sexycat.o
+		${CC} ${LDFLAGS} $^ -o sexycat ${LIBS}
+
+.PHONY: clean sexypsf sexycat
 
 clean:
-	${RM} *.o ../*.o ../spu/*.o sexypsf
+	${RM} *.o ../*.o ../spu/*.o sexypsf sexycat
 
 ../%.o: ../%.c
 	${CC} ${CFLAGS} -c -o $@ $<
