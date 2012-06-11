@@ -3,3 +3,6 @@ properly.
 
 sexycat is an even more trivial tool that writes the raw PCM sound to STDOUT.
 Pipe it into aplay or artscat to hear it. (Format S16_LE, stereo, 44.1KHz)
+
+sexyao is another test program that uses the libao library to output sound.
+It has been confirmed to work on Linux, MacOS X, and Windows (using Cygwin).

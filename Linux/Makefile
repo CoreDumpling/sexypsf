@@ -2,7 +2,7 @@
 # PCSX Makefile for Linux
 #
 
-all: sexypsf sexycat
+all: sexypsf sexycat sexyao
 
 RM = rm -f
 STRIP = strip
@@ -25,10 +25,13 @@ sexypsf:	${OBJS} LnxMain.o oss.o
 sexycat:	${OBJS} sexycat.o
 		${CC} ${LDFLAGS} $^ -o sexycat ${LIBS}
 
-.PHONY: clean sexypsf sexycat
+sexyao:		${OBJS} sexyao.o
+		gcc $^ ${LDFLAGS} -lao -o sexyao ${LIBS}
+
+.PHONY: clean sexypsf sexycat sexyao
 
 clean:
-	${RM} *.o ../*.o ../spu/*.o sexypsf sexycat
+	${RM} *.o ../*.o ../spu/*.o sexypsf sexycat sexyao
 
 ../%.o: ../%.c
 	${CC} ${CFLAGS} -c -o $@ $<
