@@ -58,6 +58,12 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  PSFTAG *tag = info->tags;
+  while (tag) {
+    printf("%s:\t%s\n", tag->key, tag->value);
+    tag = tag->next;
+  }
+
   sexy_execute();
 
   ao_close(device);
